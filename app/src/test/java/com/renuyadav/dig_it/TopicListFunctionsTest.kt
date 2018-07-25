@@ -24,7 +24,8 @@ class TopicListFunctionsTest {
         }
 
         override fun updateTopic(index: Int, topic: Topic) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            topicList.removeAt(index)
+            topicList.add(index,topic)
         }
 
         override fun getTopicIndex(topic: Topic): Int {
@@ -80,6 +81,16 @@ class TopicListFunctionsTest {
     fun test_size_topic_list() {
         topicListFunctions.addTopicAt(topicListFunctions.getListSize(),topic8)
         Assert.assertEquals(topicListFunctions.getListSize(),7)
+    }
+
+
+    @Test
+    fun test_update_topic_list() {
+        val currentIndex = topicListFunctions.getTopicIndex(topic6)
+        topic6.upVotes = 10
+        topicListFunctions.updateTopic(currentIndex,topic6)
+        Assert.assertEquals(topicListFunctions.getTopicAt(currentIndex)?.upVotes,10L)
+        Assert.assertNotEquals(topicListFunctions.getTopicAt(currentIndex)?.upVotes,6L)
     }
 
 }
